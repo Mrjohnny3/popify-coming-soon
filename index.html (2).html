@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Popify — Coming Soon</title>
+  <meta name="description" content="Popify — Discord music bot. Coming soon. Join the waitlist and support server." />
+  <style>
+    :root {
+      --bg: #4988f5;
+      --card: #25ec36;
+      --muted: #7da8f1;
+      --accent-1: #7c3aed;
+      /* purple */
+      --accent-2: rgb(208, 212, 6);
+      /* teal */
+      --glass: rgba(177, 8, 8, 0.603);
+      --glow: 0 10px 30px rgba(255, 72, 0, 0.897);
+      --radius: 14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: linear-gradient(180deg, #220101 0%, #03595c 100%);
+      color: #5fa4f8
+    }
+
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px
+    }
+
+    .card {
+      width: 100%;
+      max-width: 1100px;
+      background: linear-gradient(180deg, rgba(110, 1, 28, 0.02), rgba(255, 255, 255, 0.01));
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--glow);
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 22px;
+      align-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(53, 2, 2, 0.664)
+    }
+
+    /* Left: main promo */
+    .left {
+      padding: 18px
+    }
+
+    .logo {
+      display: flex;
+      gap: 14px;
+      align-items: center
+    }
+
+    .brand {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 22px rgba(6, 182, 212, 0.08);
+      flex-shrink: 0
+    }
+
+    .brand svg {
+      width: 44px;
+      height: 44px;
+      filter: drop-shadow(0 6px 18px rgba(124, 58, 237, 0.18))
+    }
+
+    h1 {
+      font-size: 28px;
+      margin: 0 0 6px
+    }
+
+    p.lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px
+    }
+
+    .features {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap
+    }
+
+    .pill {
+      background: var(--glass);
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.02)
+    }
+
+    .countdown {
+      margin-top: 22px;
+      display: flex;
+      gap: 12px
+    }
+
+    .countdown .tile {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      padding: 14px;
+      border-radius: 12px;
+      min-width: 72px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.02)
+    }
+
+    .countdown .num {
+      font-weight: 700;
+      font-size: 20px
+    }
+
+    .countdown .label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px
+    }
+
+    /* Email capture / actions */
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      align-items: center
+    }
+
+    .email {
+      flex: 1;
+      min-width: 0
+    }
+
+    .email input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: transparent;
+      color: inherit;
+      font-size: 14px
+    }
+
+    .btn {
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 0;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--glow)
+    }
+
+    .link-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    /* Right: dev card */
+    .right {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0.01));
+      padding: 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.02)
+    }
+
+    .dev {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 14px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45)
+    }
+
+    .avatar svg {
+      width: 46px;
+      height: 46px
+    }
+
+    .dev h3 {
+      margin: 0;
+      font-size: 16px
+    }
+
+    .dev p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .dev-stats {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px
+    }
+
+    .stat {
+      flex: 1;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.012);
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.02)
+    }
+
+    .stat .n {
+      font-weight: 700
+    }
+
+    .socials {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px
+    }
+
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    /* small screens */
+    @media (max-width:880px) {
+      .card {
+        grid-template-columns: 1fr;
+      }
+
+      .right {
+        order: -1
+      }
+    }
+
+    /* subtle animations */
+    .brand,
+    .avatar {
+      transition: transform .45s cubic-bezier(.2, .9, .2, 1)
+    }
+
+    .brand:hover,
+    .avatar:hover {
+      transform: translateY(-6px) scale(1.02)
+    }
+
+    .btn:active {
+      transform: translateY(1px)
+    }
+
+    /* glowing accent line */
+    .accent-line {
+      height: 4px;
+      border-radius: 999px;
+      margin-top: 18px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      box-shadow: 0 8px 30px rgba(124, 58, 237, 0.16)
+    }
+
+    footer {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card" role="region" aria-label="Popify coming soon">
+
+      <div class="left">
+        <div class="logo">
+          <div class="brand" aria-hidden="true">
+            <!-- simple  logo -->
+            <svg viewBox="0 0 48 48" fill="none" xmlns="https://discord.gg/fvZtycwEmE" aria-hidden>
+              <rect width="48" height="48" rx="10" fill="white" opacity="0.06" />
+              <text x="50%" y="55%" text-anchor="middle" font-family="Inter, Arial" font-weight="700" font-size="20"
+                fill="white"> </text>
+            </svg>
+          </div>
+          <div>
+            <h1>Popify — Music bot for Discord</h1>
+            <p class="lead">Smart music controls, high-quality streaming, Spotify & YouTube support. Launching soon —
+              join the waitlist.</p>
+          </div>
+        </div>
+
+        <div class="features" aria-hidden>
+          <span class="pill">YouTube • Spotify • SoundCloud</span>
+          <span class="pill">Lavalink-ready</span>
+          <span class="pill">24/7 VC stay</span>
+          <span class="pill">Now Playing & queues</span>
+        </div>
+
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div class="tile">
+            <div class="num" id="days">--</div>
+            <div class="label">Days</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="hours">--</div>
+            <div class="label">Hours</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="minutes">--</div>
+            <div class="label">Minutes</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="seconds">--</div>
+            <div class="label">Seconds</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <div class="email">
+            <form id="waitlist" onsubmit="return false">
+              <label for="email" class="visually-hidden">Email</label>
+              <input id="email" type="email" placeholder="Enter email to join waitlist (optional)" />
+            </form>
+          </div>
+          <button class="btn" id="join">Join Waitlist</button>
+          <a class="link-btn"
+            href="https://discord.com/oauth2/authorize?client_id=1313410125620314112&permissions=238415168&integration_type=0&scope=bot+applications.commands"
+            target="_blank" rel="noopener">Invite</a>
+        </div>
+
+        <div class="accent-line" role="presentation"></div>
+
+        <footer>
+          <div>Support server: <a href="https://discord.gg/fvZtycwEmE" target="_blank" rel="noopener"
+              style="color:inherit;text-decoration:underline">https://discord.gg/fvZtycwEmE</a></div>
+        </footer>
+      </div>
+
+      <aside class="right" aria-label="Developer profile">
+        <div class="dev">
+          <div class="avatar" title="Mr Johnny">
+            <svg viewBox="0 0 48 48" xmlns="https://discord.gg/fvZtycwEmE" aria-hidden>
+              <circle cx="24" cy="18" r="8" fill="white" opacity="0.12" />
+              <rect x="10" y="28" width="28" height="10" rx="3" fill="white" opacity="0.06" />
+              <text x="50%" y="62%" text-anchor="middle" font-family="Inter, Arial" font-weight="700" font-size="16"
+                fill="white"> </text>
+            </svg>
+          </div>
+          <div>
+            <h3>Mr Johnny</h3>
+            <p>Developer & owner</p>
+          </div>
+        </div>
+
+        <div class="dev-stats">
+          <div class="stat">
+            <div class="n">—</div>
+            <div class="label">Popify (soon)</div>
+          </div>
+          <div class="stat">
+            <div class="n">—</div>
+            <div class="label">FUCK YOU TOO WELCOME </div>
+          </div>
+        </div>
+
+        <div class="socials">
+          <a href="#" onclick="event.preventDefault()">Website</a>
+          <a href="#" onclick="event.preventDefault()">Docs</a>
+          <a href="mailto:popify@example.com">Contact</a>
+        </div>
+
+        <p style="margin-top:12px;color:var(--muted);font-size:13px">This coming soon page is a placeholder. When Popify
+          launches, you’ll be able to invite it using the button above and join the support server for updates.</p>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // -------------------- Countdown
+    // Set a target launch date here (UTC). Update this to match your real launch.
+    const launchDate = new Date();
+    // default: 20 days from now
+    launchDate.setUTCDate(launchDate.getUTCDate() + 20);
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = Math.max(0, launchDate - now);
+      const seconds = Math.floor(diff / 1000) % 60;
+      const minutes = Math.floor(diff / 1000 / 60) % 60;
+      const hours = Math.floor(diff / 1000 / 3600) % 24;
+      const days = Math.floor(diff / 1000 / 3600 / 24);
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // -------------------- Waitlist (client-only placeholder)
+    document.getElementById('join').addEventListener('click', () => {
+      const email = document.getElementById('email').value.trim();
+      if (email && !/^\S+@\S+\.\S+$/.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      // client side demo: store in localStorage — replace with real API later
+      const list = JSON.parse(localStorage.getItem('popify_waitlist') || '[]');
+      list.push({ email: email || null, ts: new Date().toISOString() });
+      localStorage.setItem('popify_waitlist', JSON.stringify(list));
+      alert('Thanks! You are on the waitlist.');
+      document.getElementById('email').value = '';
+    });
+
+    // Accessibility helper: visually-hidden
+    (function () {
+      const style = document.createElement('style');
+      style.innerHTML = '.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}';
+      document.head.appendChild(style);
+    })();
+  </script>
+</body>
+
+</html>
